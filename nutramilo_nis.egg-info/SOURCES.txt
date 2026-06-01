@@ -1,0 +1,14 @@
+LICENSE
+NOTICE
+README.md
+pyproject.toml
+nutramilo_nis/__init__.py
+nutramilo_nis/classify.py
+nutramilo_nis/nis.py
+nutramilo_nis.egg-info/PKG-INFO
+nutramilo_nis.egg-info/SOURCES.txt
+nutramilo_nis.egg-info/dependency_links.txt
+nutramilo_nis.egg-info/requires.txt
+nutramilo_nis.egg-info/top_level.txt
+tests/test_nis.py
+tests/test_v1_0_1_validation.py
