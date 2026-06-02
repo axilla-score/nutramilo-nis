@@ -1,0 +1,81 @@
+# YAML 1.2
+# CITATION.cff — Citation File Format v1.2.0
+# https://citation-file-format.github.io/
+#
+# This file is automatically picked up by:
+#   • GitHub ("Cite this repository" button on the repo home)
+#   • Zenodo (auto-generates DOI metadata on first GitHub release)
+#   • Software Heritage / Inspire HEP / academic mirrors
+
+cff-version: 1.2.0
+title: "Nutramilo Insulin Score (NIS) — Open Macronutrient-Derived Insulinogenic Surrogate"
+message: >-
+  If you use this software in research, please cite both the software (this
+  CITATION.cff) and the accompanying methodology paper (preferred-citation).
+type: software
+
+authors:
+  - given-names: Ivan
+    family-names: Inkov
+    email: i.inkov@nutramilo.bg
+    affiliation: International Sci Ink Press Ltd EOOD, Sofia, Bulgaria
+    orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: replace with real ORCID
+
+repository-code: "https://github.com/nutramilo/nutramilo-nis"
+url: "https://nutramilo.com/science/nis"
+license: Apache-2.0
+keywords:
+  - insulin
+  - postprandial
+  - glycemic
+  - food insulin index
+  - nutrition
+  - metabolism
+  - open-science
+  - macronutrient
+  - regression
+  - python
+
+version: "1.1.5"
+date-released: "2026-02-28"
+
+# Identifiers will be filled in automatically by Zenodo on first GitHub release.
+identifiers:
+  - description: "Latest Zenodo archive (all versions)"
+    type: doi
+    value: "10.5281/zenodo.PLACEHOLDER_CONCEPT"
+  - description: "Zenodo archive for this specific version"
+    type: doi
+    value: "10.5281/zenodo.PLACEHOLDER_V1_1_5"
+
+# Mandatory: the accompanying methodology paper.
+preferred-citation:
+  type: article
+  title: >-
+    An Open, Transparent Macronutrient-Derived Insulinogenic Surrogate
+    (NIS v1.1.5): An Exploratory Methodology Study with Out-of-Sample
+    Ablation, Deterministic Feature Classification, and Post-Hoc TOST
+    Equivalence Analysis
+  authors:
+    - given-names: Ivan
+      family-names: Inkov
+      email: i.inkov@nutramilo.bg
+      affiliation: International Sci Ink Press Ltd EOOD, Sofia, Bulgaria
+  year: 2026
+  status: in-preparation
+  journal: "medRxiv / Int J Med Rev Case Rep (target)"
+  doi: "10.XXXX/ijmrcr.2026.NIS"   # placeholder — replace on acceptance
+
+# Honest disclosure required by the licence (Apache 2.0 §4(c)).
+abstract: >-
+  Nutramilo Insulin Score (NIS) is a deterministic, source-aware computational
+  surrogate for the Holt Food Insulin Index. Four frozen OLS coefficients
+  (per-1000-kJ density of carbohydrate, protein, fat, fiber) trained on a
+  public n=147 Holt-Bell-Bao cohort, augmented with plant/mixed/animal source
+  multipliers, an energy-normalised pure-fat extrapolation guard, an optional
+  Le-2008 fructose split, and a cross-cohort linear calibration. Primary
+  inferential evaluation is restricted to a strictly out-of-sample n=25
+  literature-pooled subset. NIS v1.1.5 is positioned as an EXPLORATORY
+  methodology study, not as an externally validated predictive model; a
+  prospective CGM trial (Part II of the manuscript pair) is the planned
+  confirmatory step.
