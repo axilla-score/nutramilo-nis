@@ -78,7 +78,7 @@ print(result.nis_percent)   # → 55.4
 print(result.tier)          # → "Medium"
 print(result.tier_color)    # → "#F59E0B"
 print(result.contributions) # → {"carbs": 26.19, "protein": 11.93, "fat": 10.84, "fiber": -5.49}
-print(result.citation)      # → "Inkov I, et al. (2026). NIS … IJMRCR …"
+print(result.citation)      # → "Inkov I. (2026). NIS …"
 ```
 
 JSON-serialisable for APIs:
