@@ -43,7 +43,7 @@ permissions:
 
 defaults:
   run:
-    working-directory: ./sdk/nutramilo-nis
+    working-directory: ./
 
 jobs:
   test:
@@ -105,7 +105,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nis-dist
-          path: ./sdk/nutramilo-nis/dist/
+          path: dist/
           retention-days: 7
 
   publish-testpypi:
