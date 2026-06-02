@@ -3,20 +3,20 @@
 [![PyPI version](https://img.shields.io/pypi/v/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
 [![Python ≥ 3.9](https://img.shields.io/badge/python-≥3.9-green.svg)](https://python.org)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![DOI](https://img.shields.io/badge/DOI-10.XXXX%2Fijmrcr.2026.NIS-orange.svg)](https://doi.org/10.XXXX/ijmrcr.2026.NIS)
+<!-- DOI badge will be added after publication -->
 [![PyPI downloads](https://img.shields.io/pypi/dm/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
 [![Status: exploratory-methodology](https://img.shields.io/badge/status-exploratory--methodology-yellow.svg)](#)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-purple.svg)](https://github.com/astral-sh/ruff)
 
 > **Reference implementation of the Nutramilo Insulin Score (NIS™)** —
-> an open, **exploratory** macronutrient-derived insulinogenic surrogate
-> computable from any meal composition.  Trained on the Holt–Bell–Bao
-> Food Insulin Index cohort (n = 147) and evaluated on a strictly
-> out-of-sample subset (n = 25).
+> an open-source algorithm designed to estimate the relative insulinogenic potential
+> of a meal from its nutritional composition.  NIS is intended for research, educational use,
+> software development, and exploratory nutritional analysis.
+> It should not be interpreted as a validated clinical prediction model.
 >
 > ⚠️ **Positioning.** NIS v1.1.5 is an **exploratory methodology study**,
 > not an externally validated predictive model.  A prospective CGM trial
-> is the planned confirmatory step (see manuscript §4.2 + Part II).
+> is the planned confirmatory step (technical documentation).
 
 ---
 
@@ -28,9 +28,9 @@
 | Suitable for mobile apps & CGM-less use | ❌ No | ✅ Yes |
 | Frozen, versioned coefficients | ❌ No | ✅ Yes (Apache 2.0, since v1.0) |
 | Mandatory citation in derivatives | ❌ No | ✅ Yes (NOTICE clause) |
-| Open dataset (SHA-256-verified) | ❌ No | ✅ Yes (Zenodo on release) |
+| Open-source methodology | ❌ No | ✅ Yes |
 | Out-of-sample evaluation reported | Partial | ✅ Yes (n = 25 hold-out) |
-| Externally validated on fresh CGM cohort | n/a | ❌ **Not yet** — see Part II |
+| Externally validated on fresh CGM cohort | n/a | ❌ **Not yet** — see technical documentation |
 
 **Headline metrics (v1.1.5 on n = 25 strictly out-of-sample subset):**
 
@@ -75,7 +75,7 @@ print(result.nis_percent)   # → 65.0
 print(result.tier)          # → "Medium"
 print(result.tier_color)    # → "#F59E0B"
 print(result.contributions) # → {"carbs": 9.65, "protein": 3.36, ...}
-print(result.citation)      # → "Inkov I, et al. (2026). NIS … IJMRCR …"
+print(result.citation)      # → "Inkov I. (2026). NIS … IJMRCR …"
 ```
 
 JSON-serialisable for APIs:
@@ -85,7 +85,7 @@ import json
 print(json.dumps(result.to_dict(), indent=2))
 ```
 
-## 🧪 Worked examples (from the paper)
+## 🧪 Worked examples
 
 > Computed with default `mixed` source-type and calibration **on**
 > (slope = 0.7275, intercept = 8.111).  See `tests/test_nis_v1_1_*.py`
@@ -158,50 +158,47 @@ Use `.to_dict()` → JSON-serialisable.
 
 | Artifact | Location |
 |---|---|
-| Frozen training dataset | Zenodo DOI [10.5281/zenodo.XXXXXX](https://zenodo.org/) |
+| Frozen training dataset | To be archived in a public repository |
 | Regression notebook | [`notebooks/independent_regression_v2.ipynb`](https://github.com/nutramilo/nutramilo-nis) |
-| SHA-256 of v1.0 dataset | `b41eb157661b2d8ad0…` (paper § 2.2) |
+| SHA-256 of v1.0 dataset | `b41eb157661b2d8ad0…`  |
 | Unit tests | `pytest -q` — 13 tests, all should pass |
-| Figures (PNG + TIFF 300dpi) | Paper supplement, Figs 1–6 |
+| Figures (PNG + TIFF 300dpi) |
 
-## 📖 Paper
+## Scientific Status
 
-> **Inkov, I., et al.** (2026). "Nutramilo Insulin Score (NIS): An Open,
-> Macronutrient-Derived Algorithm for Predicting Postprandial Insulinaemic
-> Response — Development and Validation Against the Holt Food Insulin Index."
-> *International Journal of Medical Reviews and Case Reports*, in press.
-> DOI: [10.XXXX/ijmrcr.2026.NIS](https://doi.org/10.XXXX/ijmrcr.2026.NIS)
+NIS is currently presented as an exploratory methodology.
 
-**Pre-print:** [medRxiv 2026.02.XXXXXX](https://medrxiv.org/)
+The algorithm has been evaluated during development using internal validation procedures and independent test subsets. Users should interpret outputs as comparative estimates rather than direct physiological measurements.
 
-If you use NIS in research, **please cite the paper** (Apache 2.0 + NOTICE).
+Further validation using independent cohorts and prospective studies may improve understanding of the model's performance and limitations.
+
+## Scientific Background
+
+The methodology underlying NIS is being prepared for scientific dissemination.
+
+Citation information will be updated once a peer-reviewed publication or public preprint becomes available.
 
 ## ™ Trademark notice
 
 `NIS™`, `Nutramilo Insulin Score™`, and `Nutramilo™` are trademarks of
-**International Sci Ink Press Ltd EOOD** (EIK 205414288, Sofia, Bulgaria),
-filed at the EUIPO.
+**International Sci Ink Press Ltd EOOD** (EIK 205414288, Sofia, Bulgaria).
+Trademark status subject to applicable registrations and filings.
 
 The Apache 2.0 licence covers the **code** — *not* the trademarks. For
 commercial use of the marks in branding/marketing, contact
-[legal@nutramilo.com](mailto:legal@nutramilo.com).
+[legal@nutramilo.bg](mailto:legal@nutramilo.bg).
 
 ## ⚖️ Disclaimer & regulatory framing
 
-NIS is intended for **educational and research** purposes.
-It is **not** a medical device, does **not** diagnose any disease, and should
-**not** replace professional clinical judgement.
+NIS is intended for research and educational purposes.
 
-| Framework | Classification |
-|---|---|
-| EU MDR 2017/745 | **Not a medical device** |
-| EU AI Act 2024/1689 | **Limited risk** (Art. 50 — transparency only) |
+Users are responsible for determining whether any particular use case may be subject to regulatory requirements in their jurisdiction.
 
 ## 🏗️ Roadmap (semver-frozen)
 
 - **v1.x** — patch fixes only; coefficients **never** change.
-- **v2.0.x** — prospective CGM trial re-regression (manuscript Part II,
-  pre-registered at OSF before data collection).
+- **v2.0.x** — prospective CGM trial re-regression (manuscript Part II).
+  
 
 
 | GDPR | No personal data processed by the library itself |
@@ -231,7 +228,7 @@ combine `compute_nis` here with the open `compute_dil` formula:
 
 | For | Email |
 |---|---|
-| Research collaboration | research@nutramilo.com |
-| Trademark / commercial licensing | legal@nutramilo.com |
+| Research collaboration | research@nutramilo.bg |
+| Trademark / commercial licensing | legal@nutramilo.bg |
 | Bug reports & feature requests | [github.com/nutramilo/nutramilo-nis/issues](https://github.com/nutramilo/nutramilo-nis/issues) |
 | General product info | https://nutramilo.com/science |
