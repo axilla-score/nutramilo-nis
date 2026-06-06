@@ -1,6 +1,5 @@
 # nutramilo-nis
 
-[![PyPI version](https://img.shields.io/pypi/v/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
 [![Python ≥ 3.9](https://img.shields.io/badge/python-≥3.9-green.svg)](https://python.org)
 <!-- DOI badge will be added after publication -->
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -8,13 +7,13 @@
 [![Status: exploratory-methodology](https://img.shields.io/badge/status-exploratory--methodology-yellow.svg)](#)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-purple.svg)](https://github.com/astral-sh/ruff)
 
-> **Reference implementation of the Nutramilo Insulin Score (NIS™)** —
+> **Reference implementation of the Nutramilo Insulin Score (NIS)** —
 > an open-source algorithm designed to estimate the relative insulinogenic
 > potential of a meal from its nutritional composition.
 > NIS is intended for research, educational use, software development,
 and exploratory nutritional analysis. It should not be interpreted as a
 clinically validated predictor of postprandial insulin response.
-> ⚠️ Scientific status. NIS v1.1.7 represents an exploratory methodology.
+> ⚠️ Scientific status. NIS v1.1.8 represents an exploratory methodology.
 The algorithm is intended for comparative analysis of meals and hypothesis
 generation rather than diagnostic or therapeutic decision-making.
 
@@ -22,7 +21,7 @@ generation rather than diagnostic or therapeutic decision-making.
 
 ## ✨ Why NIS?
 
-| Property | Holt Food Insulin Index (FII) | **NIS v1.1.7** |
+| Property | Holt Food Insulin Index (FII) | **NIS v1.1.8** |
 |---|---|---|
 | In-vivo insulin AUC measurement required | ✅ Yes | ❌ No — **composition only** |
 | Suitable for mobile apps & CGM-less use | ❌ No | ✅ Yes |
@@ -102,7 +101,7 @@ print(json.dumps(result.to_dict(), indent=2))
 | Black bean & spinach bowl | 30 / 14 / 6 / 13 | **44.3** | Moderate |
 | Avocado-omelette + side salad | 6 / 18 / 22 / 5 | **42.0** | Moderate |
 
-## 📐 Algorithm (5-step pipeline, v1.1.7)
+## 📐 Algorithm (5-step pipeline, v1.1.8)
 
 1. **Per-1000-kJ normalisation** using Atwater factors (17·C + 17·P + 37·F kJ/g).
 2. **Linear regression layer** — independent OLS on the frozen
@@ -122,7 +121,7 @@ print(json.dumps(result.to_dict(), indent=2))
 
 > **Note on validation framing.**  The n = 147 training cohort and the
 > n = 63 cross-cohort calibration set share Holt 1997 foods (derivational
-> overlap, see see project documentation).  All inferential claims in v1.1.7 are
+> overlap, see see project documentation).  All inferential claims in v1.1.8 are
 > therefore restricted to the **n = 25 strictly out-of-sample subset**
 > (Bao 2011, Nilsson 2004, Boirie 1997, Trichopoulou 2003, Sahyoun 2008).
 
@@ -175,7 +174,7 @@ All calculations are fully reproducible from the published source code and relea
 
 ## ™ Trademark Notice
 
-NIS™, Nutramilo Insulin Score™, and Nutramilo™ may be used to identify
+NIS, Nutramilo Insulin Score™, and Nutramilo™ may be used to identify
 the project and associated materials.
 
 The Apache 2.0 license applies to the software source code.
