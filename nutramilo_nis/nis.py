@@ -1,18 +1,13 @@
-"""Nutramilo Insulin Score (NIS) v1.0 — reference implementation.
+"Nutramilo Insulin Score (NIS) v1.0 — reference implementation."
 
-This module is the **canonical, frozen implementation** of the algorithm
-described in:
+This module contains the reference implementation of NIS v1.1.7.
 
-    Inkov, I. et al. (2026). "Nutramilo Insulin Score (NIS): An Open,
-    Macronutrient-Derived Algorithm for Predicting Postprandial
-    Insulinaemic Response — Development and Validation Against the Holt
-    Food Insulin Index." International Journal of Medical Reviews and
-    Case Reports.  DOI: 
+   Citation:
+    Citation metadata are provided in CITATION.cff.
 
-The coefficients in :data:`NIS_COEFFICIENTS` are frozen at the values used
-in the publication's validation cohort. They will never change for
-:data:`NIS_VERSION` ``1.0.0`` — guaranteeing reproducibility for any
-downstream research that cites this version.
+The coefficients in :data:`NIS_COEFFICIENTS` are frozen for the current
+release series and maintained for reproducibility.
+:data:`NIS_VERSION` identifies the released implementation version.
 
 Algorithm summary
 -----------------
@@ -27,14 +22,14 @@ from dataclasses import dataclass, asdict
 from typing import Dict, Optional, Literal, Any
 
 # ─────────────────────────────────────────────────────────────────────────
-# FROZEN PUBLICATION CONSTANTS — DO NOT MODIFY in v1.0.x patches.
-# Changes here require a new MAJOR version (e.g. v2.0.0) and a fresh paper.
+# Frozen algorithm constants.
+# Changes require a new software version and updated documentation.
 # ─────────────────────────────────────────────────────────────────────────
-NIS_VERSION: str = "1.1.6"
+NIS_VERSION: str = "1.1.7"
 NIS_COEFFICIENTS_DATE: str = "2026-02-25"  # coefficients frozen since v1.1.1
 NIS_COEFFICIENTS: Dict[str, float] = {
     # Independent OLS regression on HoltBellBao_v1_frozen_2026.csv (n=147).
-    # SHA-256 of dataset: b41eb157661b2d8ad0... (full hash in paper, Sec. 2.2).
+    # SHA-256 hash available in project documentation.
     "carbs":   1.61,   # net carbohydrate, per 1000 kJ
     "protein": 0.66,   # per 1000 kJ
     "fat":     1.20,   # per 1000 kJ
@@ -69,10 +64,10 @@ _KJ_PROTEIN = 17.0
 _KJ_FAT     = 37.0
 
 # Holt cross-track: 100 g glucose / 1700 kJ → density ≈ 58.8 g IL per 1000 kJ
-# maps to 100 % NIS.  See paper Sec. 2.3.
+# maps to 100 % NIS.  See technical documentation.
 _GLUCOSE_IL_DENSITY_REF: float = 58.8
 
-# Clinical-tier floors (paper Sec. 2.4)
+# Clinical-tier floors (technical documentation)
 _TIER_FLOORS: Dict[str, float] = {"low": 0.0, "medium": 30.0, "high": 55.0}
 
 # v1.1.1 — Pure-fat guard threshold (energy-normalised).
@@ -86,7 +81,7 @@ _TIER_FLOORS: Dict[str, float] = {"low": 0.0, "medium": 30.0, "high": 55.0}
 PURE_FAT_DENSITY_THRESHOLD: float = 5.0   # g (net carb + protein) per 1000 kJ
 PURE_FAT_ATTENUATION: float = 0.15
 
-# Tier labels (paper Table 1)
+# Tier labels (technical documentation)
 _TIER_BANDS = [
     (25.0, "Low",       "#10B981"),
     (50.0, "Moderate",  "#84CC16"),
@@ -136,11 +131,7 @@ class NisResult:
     contributions : dict[str, float]
         Per-macronutrient absolute contribution to PIRU.
     nis_version : str
-        Frozen version identifier (e.g. "1.0.0").
-    coefficients_date : str
-        Date the coefficients were regressed (ISO YYYY-MM-DD).
-    citation : str
-        Required academic citation.
+       Citation metadata string.
     """
     nis_percent: float
     tier: str
@@ -187,7 +178,7 @@ def compute_nis(
     sugar_g: float = 0.0,
     apply_calibration: bool = True,
 ) -> NisResult:
-    """Compute the Nutramilo Insulin Score (NIS) for a single meal / food.
+    "Compute the Nutramilo Insulin Score (NIS) for a single meal / food."
 
     Parameters
     ----------
@@ -200,7 +191,7 @@ def compute_nis(
     fiber_g : float, default ``0.0``
         Dietary fiber, grams.  Net carbohydrate = ``carbs_g − fiber_g``.
     insulin_impact_tier : {"low", "medium", "high"}, default ``"low"``
-        Clinical tier of the dominant food source (paper Sec. 2.4).
+        Clinical tier of the dominant food source.
     il_total_g : float, optional
         Holt-Bell insulinaemic-load grams for cross-track validation.
         If supplied, used to compute :attr:`NisResult.holt_pct`.
@@ -381,7 +372,7 @@ def compute_nis(
         nis_version=NIS_VERSION,
         coefficients_date=NIS_COEFFICIENTS_DATE,
         citation=(
-            "Inkov, I. (2026). Nutramilo Insulin Score (NIS) v1.1.0. "
-            "Int J Med Rev Case Rep. DOI: "
-        ),
+    "Nutramilo Insulin Score (NIS). "
+    "See CITATION.cff for citation metadata."
+),
     )
