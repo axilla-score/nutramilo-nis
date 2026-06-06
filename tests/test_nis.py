@@ -71,7 +71,7 @@ def test_result_serialisable():
     d = r.to_dict()
     assert "nis_percent" in d
     assert "citation" in d
-    assert "Inkov" in d["citation"]
+    assert "CITATION.cff" in d["citation"]
 
 
 def test_worked_example_balanced_meal():
