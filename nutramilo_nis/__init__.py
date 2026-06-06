@@ -7,9 +7,9 @@ Public API:
     37.4
 
 Citation (required by NOTICE file):
-    Inkov, I. et al. (2026). "Nutramilo Insulin Score (NIS): An Open,
+    Inkov, I. (2026). "Nutramilo Insulin Score (NIS): An Open,
     Macronutrient-Derived Algorithm for Predicting Postprandial
-    Insulinaemic Response..." Int J Med Rev Case Rep. DOI: 10.XXXX/ijmrcr.2026.NIS
+    Insulinaemic Response..." Int J Med Rev Case Rep. DOI: 
 
 Trademarks: NIS™, Nutramilo Insulin Score™, Nutramilo™ — International Sci Ink Press Ltd EOOD, EUIPO.
 """
@@ -27,7 +27,7 @@ from .nis import (
 )
 from .classify import classify
 
-__version__ = "1.1.5"
+__version__ = "1.1.6"
 __all__ = [
     "compute_nis",
     "classify",
