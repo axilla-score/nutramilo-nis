@@ -1,28 +1,20 @@
-# YAML 1.2
-# CITATION.cff — Citation File Format v1.2.0
-# https://citation-file-format.github.io/
-#
-# This file is automatically picked up by:
-#   • GitHub ("Cite this repository" button on the repo home)
-#   • Zenodo (auto-generates DOI metadata on first GitHub release)
-#   • Software Heritage / Inspire HEP / academic mirrors
-
 cff-version: 1.2.0
+
 title: "Nutramilo Insulin Score (NIS) — Open Macronutrient-Derived Insulinogenic Surrogate"
 message: >-
   If you use this software in research, please cite both the software (this
   CITATION.cff) and the accompanying methodology paper (preferred-citation).
 type: software
 
+
 authors:
   - given-names: Ivan
     family-names: Inkov
-    email: i.inkov@nutramilo.bg
+    email: inkov@nutramilo.bg
     affiliation: International Sci Ink Press Ltd EOOD, Sofia, Bulgaria
-    orcid: "https://orcid.org/0000-0000-0000-0000"  # TODO: replace with real ORCID
 
-repository-code: "https://github.com/nutramilo/nutramilo-nis"
-url: "https://nutramilo.com/science/nis"
+version: "1.1.6"
+
 license: Apache-2.0
 keywords:
   - insulin
@@ -35,36 +27,6 @@ keywords:
   - macronutrient
   - regression
   - python
-
-version: "1.1.6"
-date-released: "2026-02-28"
-
-# Identifiers will be filled in automatically by Zenodo on first GitHub release.
-identifiers:
-  - description: "Latest Zenodo archive (all versions)"
-    type: doi
-    value: "10.5281/zenodo.PLACEHOLDER_CONCEPT"
-  - description: "Zenodo archive for this specific version"
-    type: doi
-    value: "10.5281/zenodo.PLACEHOLDER_V1_1_6"
-
-# Mandatory: the accompanying methodology paper.
-preferred-citation:
-  type: article
-  title: >-
-    An Open, Transparent Macronutrient-Derived Insulinogenic Surrogate
-    (NIS v1.1.6): An Exploratory Methodology Study with Out-of-Sample
-    Ablation, Deterministic Feature Classification, and Post-Hoc TOST
-    Equivalence Analysis
-  authors:
-    - given-names: Ivan
-      family-names: Inkov
-      email: i.inkov@nutramilo.bg
-      affiliation: International Sci Ink Press Ltd EOOD, Sofia, Bulgaria
-  year: 2026
-  status: in-preparation
-  journal: "medRxiv / Int J Med Rev Case Rep (target)"
-  doi:   # placeholder — replace on acceptance
 
 # Honest disclosure required by the licence (Apache 2.0 §4(c)).
 abstract: >-
@@ -79,3 +41,7 @@ abstract: >-
   methodology study, not as an externally validated predictive model; a
   prospective CGM trial (Part II of the manuscript pair) is the planned
   confirmatory step.
+
+repository-code: "https://github.com/axilla-score/nutramilo-nis"
+
+date-released: "2026-06-06"
