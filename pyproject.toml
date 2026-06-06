@@ -4,18 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nutramilo-nis"
-version = "1.1.6"
-description = "Nutramilo Insulin Score (NIS) — open algorithm for predicting postprandial insulin response from macronutrient composition."
+version = "1.1.7"
+description = "Open-source algorithm for estimating the relative insulinogenic potential of meals from nutritional composition."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 authors = [
     { name = "Ivan Inkov", email = "inkov@nutramilo.bg" },
-    { name = "International Sci Ink Press Ltd EOOD", email = "research@nutramilo.bg" },
 ]
 keywords = [
     "insulin", "postprandial", "glycemic", "nutrition", "metabolism",
-    "food insulin index", "NIS", "diabetes", "nutrigenomics", "biomedical"
+    "food insulin index", "NIS", "diabetes", "biomedical"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -39,9 +38,9 @@ validation = ["numpy>=1.24", "pandas>=2.0", "scipy>=1.10"]
 
 [project.urls]
 Homepage = "https://nutramilo.com/science"
-Repository = "https://github.com/nutramilo/nutramilo-nis"
+Repository = "https://github.com/axilla-score/nutramilo-nis"
 Documentation = "https://nutramilo.com/science/nis"
-Issues = "https://github.com/nutramilo/nutramilo-nis/issues"
+Issues = "https://github.com//axilla-score/nutramilo-nis/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
