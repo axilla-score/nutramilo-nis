@@ -6,11 +6,11 @@ Licensed under the Apache License, Version 2.0.
 
 Required citation when used in research or derivative work:
 
-    Inkov, I. et al. (2026). "Nutramilo Insulin Score (NIS): An Open,
+    Inkov, I. (2026). "Nutramilo Insulin Score (NIS): An Open,
     Macronutrient-Derived Algorithm for Predicting Postprandial
     Insulinaemic Response — Development and Validation Against the
     Holt Food Insulin Index." Int J Med Rev Case Rep.
-    DOI: 10.XXXX/ijmrcr.2026.NIS
+    DOI: 
 
 Methodological lineage:
   - Holt SHA, Brand-Miller JC, Petocz P (1997). An insulin index of foods:
@@ -22,6 +22,3 @@ Methodological lineage:
     insulinemia in lean, young, healthy adults: glycemic load compared
     with carbohydrate content alone. Am J Clin Nutr 90:986-92. PMID 19710196.
 
-Trademark: "NIS™", "Nutramilo Insulin Score™" and "Nutramilo™" are
-trademarks of International Sci Ink Press Ltd EOOD, applied for at EUIPO.
-Use of marks restricted under separate licence (see LICENSE).
