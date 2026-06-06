@@ -1,4 +1,4 @@
-"Nutramilo Insulin Score (NIS) v1.0 — reference implementation."
+"""Nutramilo Insulin Score (NIS) v1.0 — reference implementation.
 
 This module contains the reference implementation of NIS v1.1.7.
 
@@ -178,7 +178,7 @@ def compute_nis(
     sugar_g: float = 0.0,
     apply_calibration: bool = True,
 ) -> NisResult:
-    "Compute the Nutramilo Insulin Score (NIS) for a single meal / food."
+    """Compute the Nutramilo Insulin Score (NIS) for a single meal / food.
 
     Parameters
     ----------
@@ -376,3 +376,4 @@ def compute_nis(
     "See CITATION.cff for citation metadata."
 ),
     )
+    """
