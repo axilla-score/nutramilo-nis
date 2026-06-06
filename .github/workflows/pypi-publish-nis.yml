@@ -176,7 +176,7 @@ jobs:
           body: |
             ## Nutramilo Insulin Score (NIS) — v${{ needs.build.outputs.version }}
 
-            Frozen reference implementation of the NIS algorithm.
+            Reference implementation of the Nutramilo Insulin Score (NIS).
 
             **Install:**
             ```bash
@@ -184,10 +184,7 @@ jobs:
             ```
 
             **Cite (required by NOTICE):**
-            > Inkov, I. (2026). Nutramilo Insulin Score (NIS):
-            > An Open, Macronutrient-Derived Algorithm for Predicting
-            > Postprandial Insulinaemic Response. Int J Med Rev Case Rep.
-            > DOI: 
+            > See CITATION.cff for citation metadata.
 
-            **License:** Apache-2.0 + mandatory citation clause (see NOTICE).
-            **PyPI:** https://pypi.org/project/nutramilo-nis/${{ needs.build.outputs.version }}/
+            **License:** Apache-2.0.
+            **PyPI:** https://pypi.org/project/nutramilo-nis/
