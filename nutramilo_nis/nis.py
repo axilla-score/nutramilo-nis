@@ -7,7 +7,7 @@ described in:
     Macronutrient-Derived Algorithm for Predicting Postprandial
     Insulinaemic Response — Development and Validation Against the Holt
     Food Insulin Index." International Journal of Medical Reviews and
-    Case Reports.  DOI: 10.XXXX/ijmrcr.2026.NIS
+    Case Reports.  DOI: 
 
 The coefficients in :data:`NIS_COEFFICIENTS` are frozen at the values used
 in the publication's validation cohort. They will never change for
@@ -30,7 +30,7 @@ from typing import Dict, Optional, Literal, Any
 # FROZEN PUBLICATION CONSTANTS — DO NOT MODIFY in v1.0.x patches.
 # Changes here require a new MAJOR version (e.g. v2.0.0) and a fresh paper.
 # ─────────────────────────────────────────────────────────────────────────
-NIS_VERSION: str = "1.1.5"
+NIS_VERSION: str = "1.1.6"
 NIS_COEFFICIENTS_DATE: str = "2026-02-25"  # coefficients frozen since v1.1.1
 NIS_COEFFICIENTS: Dict[str, float] = {
     # Independent OLS regression on HoltBellBao_v1_frozen_2026.csv (n=147).
@@ -381,7 +381,7 @@ def compute_nis(
         nis_version=NIS_VERSION,
         coefficients_date=NIS_COEFFICIENTS_DATE,
         citation=(
-            "Inkov, I. et al. (2026). Nutramilo Insulin Score (NIS) v1.1.0. "
-            "Int J Med Rev Case Rep. DOI: 10.XXXX/ijmrcr.2026.NIS"
+            "Inkov, I. (2026). Nutramilo Insulin Score (NIS) v1.1.0. "
+            "Int J Med Rev Case Rep. DOI: "
         ),
     )
