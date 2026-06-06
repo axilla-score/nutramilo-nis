@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nutramilo-nis"
-version = "1.1.5"
+version = "1.1.6"
 description = "Nutramilo Insulin Score (NIS) — open algorithm for predicting postprandial insulin response from macronutrient composition."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -41,7 +41,6 @@ validation = ["numpy>=1.24", "pandas>=2.0", "scipy>=1.10"]
 Homepage = "https://nutramilo.com/science"
 Repository = "https://github.com/nutramilo/nutramilo-nis"
 Documentation = "https://nutramilo.com/science/nis"
-Paper = "https://doi.org/10.XXXX/ijmrcr.2026.NIS"
 Issues = "https://github.com/nutramilo/nutramilo-nis/issues"
 
 [tool.setuptools.packages.find]
