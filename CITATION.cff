@@ -13,7 +13,7 @@ authors:
     email: inkov@nutramilo.bg
     affiliation: International Sci Ink Press Ltd EOOD, Sofia, Bulgaria
 
-version: "1.1.6"
+version: "1.1.7"
 
 license: Apache-2.0
 keywords:
@@ -37,7 +37,7 @@ abstract: >-
   multipliers, an energy-normalised pure-fat extrapolation guard, an optional
   Le-2008 fructose split, and a cross-cohort linear calibration. Primary
   inferential evaluation is restricted to a strictly out-of-sample n=25
-  literature-pooled subset. NIS v1.1.5 is positioned as an EXPLORATORY
+  literature-pooled subset. NIS v1.1.7 is positioned as an EXPLORATORY
   methodology study, not as an externally validated predictive model; a
   prospective CGM trial (Part II of the manuscript pair) is the planned
   confirmatory step.
