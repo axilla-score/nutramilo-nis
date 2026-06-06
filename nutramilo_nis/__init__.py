@@ -1,4 +1,5 @@
-"""Nutramilo Insulin Score (NIS) — open, macronutrient-derived postprandial insulin response algorithm.
+"Nutramilo Insulin Score (NIS) — an open-source algorithm designed to estimate the relative insulinogenic potential of a meal from its nutritional composition. NIS is intended for research, educational use, software development, and exploratory nutritional analysis. It should not be interpreted as a clinically validated predictor of postprandial insulin response. ⚠️ Scientific status. NIS v1.1.7 represents an exploratory methodology. The algorithm is intended for comparative analysis of meals and hypothesis generation rather than diagnostic or therapeutic decision-making."
+
 
 Public API:
     >>> from nutramilo_nis import compute_nis
@@ -6,12 +7,11 @@ Public API:
     >>> result["nis_percent"]
     37.4
 
-Citation (required by NOTICE file):
-    Inkov, I. (2026). "Nutramilo Insulin Score (NIS): An Open,
-    Macronutrient-Derived Algorithm for Predicting Postprandial
-    Insulinaemic Response..." Int J Med Rev Case Rep. DOI: 
+Citation:
+    If you use this software, please cite the software repository
+    and accompanying documentation.  
 
-Trademarks: NIS™, Nutramilo Insulin Score™, Nutramilo™ — International Sci Ink Press Ltd EOOD, EUIPO.
+
 """
 from .nis import (
     NIS_VERSION,
@@ -27,7 +27,7 @@ from .nis import (
 )
 from .classify import classify
 
-__version__ = "1.1.6"
+__version__ = "1.1.7"
 __all__ = [
     "compute_nis",
     "classify",
