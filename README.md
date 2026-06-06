@@ -14,7 +14,7 @@
 > NIS is intended for research, educational use, software development,
 and exploratory nutritional analysis. It should not be interpreted as a
 clinically validated predictor of postprandial insulin response.
-> ⚠️ Scientific status. NIS v1.1.6 represents an exploratory methodology.
+> ⚠️ Scientific status. NIS v1.1.7 represents an exploratory methodology.
 The algorithm is intended for comparative analysis of meals and hypothesis
 generation rather than diagnostic or therapeutic decision-making.
 
@@ -22,12 +22,11 @@ generation rather than diagnostic or therapeutic decision-making.
 
 ## ✨ Why NIS?
 
-| Property | Holt Food Insulin Index (FII) | **NIS v1.1.6** |
+| Property | Holt Food Insulin Index (FII) | **NIS v1.1.7** |
 |---|---|---|
 | In-vivo insulin AUC measurement required | ✅ Yes | ❌ No — **composition only** |
 | Suitable for mobile apps & CGM-less use | ❌ No | ✅ Yes |
 | Frozen, versioned coefficients | ❌ No | ✅ Yes (Apache 2.0, since v1.0) |
-| Mandatory citation in derivatives | ❌ No | ✅ Yes (NOTICE clause) |
 | Open dataset (SHA-256-verified) | ❌ No | ✅ Yes (Zenodo on release) |
 | Out-of-sample evaluation reported | Partial | ✅ Yes (n = 25 hold-out) |
 | Externally validated on fresh CGM cohort | n/a | ❌ **Not yet** — see technical documentation |
@@ -78,7 +77,8 @@ print(result.nis_percent)   # → 55.4
 print(result.tier)          # → "Medium"
 print(result.tier_color)    # → "#F59E0B"
 print(result.contributions) # → {"carbs": 26.19, "protein": 11.93, "fat": 10.84, "fiber": -5.49}
-print(result.citation)      # → "Inkov I. (2026). NIS …"
+print(result.citation)
+# → "See CITATION.cff for citation metadata."
 ```
 
 JSON-serialisable for APIs:
@@ -102,7 +102,7 @@ print(json.dumps(result.to_dict(), indent=2))
 | Black bean & spinach bowl | 30 / 14 / 6 / 13 | **44.3** | Moderate |
 | Avocado-omelette + side salad | 6 / 18 / 22 / 5 | **42.0** | Moderate |
 
-## 📐 Algorithm (5-step pipeline, v1.1.6)
+## 📐 Algorithm (5-step pipeline, v1.1.7)
 
 1. **Per-1000-kJ normalisation** using Atwater factors (17·C + 17·P + 37·F kJ/g).
 2. **Linear regression layer** — independent OLS on the frozen
@@ -122,7 +122,7 @@ print(json.dumps(result.to_dict(), indent=2))
 
 > **Note on validation framing.**  The n = 147 training cohort and the
 > n = 63 cross-cohort calibration set share Holt 1997 foods (derivational
-> overlap, see manuscript §4.3 L1).  All inferential claims in v1.1.6 are
+> overlap, see see project documentation).  All inferential claims in v1.1.7 are
 > therefore restricted to the **n = 25 strictly out-of-sample subset**
 > (Bao 2011, Nilsson 2004, Boirie 1997, Trichopoulou 2003, Sahyoun 2008).
 
@@ -136,7 +136,7 @@ print(json.dumps(result.to_dict(), indent=2))
 | `protein_g` | `float` | — | Protein grams |
 | `fat_g` | `float` | — | Total fat grams |
 | `fiber_g` | `float` | `0.0` | Dietary fibre grams (blunts response) |
-| `insulin_impact_tier` | `Literal["low","medium","high"]` | `"low"` | Clinical floor band (paper §2.4) |
+| `insulin_impact_tier` | `Literal["low","medium","high"]` | `"low"` | Clinical floor band |
 | `il_total_g` | `Optional[float]` | `None` | Pre-computed Insulin Load grams — activates the Holt cross-track |
 | `fat_type` | `Literal["plant","mixed","animal"]` | `"mixed"` | Fat-source multiplier — plant 0.45, mixed 1.00, animal 1.25 (Holt 1997 / Trichopoulou 2003) |
 | `protein_type` | `Literal["plant","mixed","animal"]` | `"mixed"` | Protein-source multiplier — plant 0.55, mixed 1.00, animal 1.30 (Nilsson 2004 / Boirie 1997) |
@@ -157,7 +157,7 @@ print(json.dumps(result.to_dict(), indent=2))
 | `contributions` | `dict[str, float]` | Per-macro absolute contribution to PIRU |
 | `nis_version` | `str` | Frozen version (e.g. `"1.0.0"`) |
 | `coefficients_date` | `str` | Date coefficients were regressed (ISO) |
-| `citation` | `str` | Required academic citation |
+| `citation` | `str` | Citation metadata string |
 
 Use `.to_dict()` → JSON-serialisable.
 
@@ -208,7 +208,7 @@ NIS and DIL are **complementary, not interchangeable**:
 | Output | 0–100 % (intensity score) | grams of carb-equivalent (load) |
 | Use-case | Compare two meals; rank foods on a phone; coach single-meal swaps | Daily budget tracking; weekly trend monitoring; clinical dosing-adjacent reasoning |
 | Formula | 5-step pipeline with source-aware multipliers, pure-fat guard, cross-cohort calibration | `0.69 × protein + max(carbs − fiber, 0)` per food, summed across the day |
-| Validation | n = 25 OOS Pearson r = 0.83, MAE = 10.2 | OLS-stable across Ridge/LASSO; food-level coefficient frozen at 0.69 since 2026-02-10 |
+| Validation | exploratory out-of-sample evaluation reported in project documentation | OLS-stable across Ridge/LASSO; food-level coefficient frozen at 0.69 since 2026-02-10 |
 | In this SDK | `compute_nis(...)` | not bundled — see `nutramilo-health` package or `services/dil_formula.py` in the Nutramilo platform |
 
 If you need both layers (per-meal NIS for ranking + daily DIL for budget),
@@ -217,7 +217,7 @@ combine `compute_nis` here with the open `compute_dil` formula:
 
 ## 📜 Licence
 
-[Apache 2.0](LICENSE) — see [`NOTICE`](NOTICE) for the mandatory citation clause.
+[Apache 2.0](LICENSE) — see NOTICE for the mandatory citation clause.
 
 ## 💬 Contact
 
@@ -225,5 +225,5 @@ combine `compute_nis` here with the open `compute_dil` formula:
 |---|---|
 | Research collaboration | research@nutramilo.bg |
 | Trademark / commercial licensing | legal@nutramilo.bg |
-| Bug reports & feature requests | [github.com/nutramilo/nutramilo-nis/issues](https://github.com/nutramilo/nutramilo-nis/issues) |
+| Bug reports & feature requests | https://github.com/axilla-score/nutramilo-nis/issues |
 | General product info | https://nutramilo.com/science |
