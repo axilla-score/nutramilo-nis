@@ -1,6 +1,6 @@
 """Nutramilo Insulin Score (NIS) v1.0 — reference implementation.
 
-This module contains the reference implementation of NIS v1.1.8.
+This module contains the reference implementation of NIS v1.1.9.
 
    Citation:
     Citation metadata are provided in CITATION.cff.
@@ -25,7 +25,7 @@ from typing import Dict, Optional, Literal, Any
 # Frozen algorithm constants.
 # Changes require a new software version and updated documentation.
 # ─────────────────────────────────────────────────────────────────────────
-NIS_VERSION: str = "1.1.8"
+NIS_VERSION: str = "1.1.9"
 NIS_COEFFICIENTS_DATE: str = "2026-02-25"  # coefficients frozen since v1.1.1
 NIS_COEFFICIENTS: Dict[str, float] = {
     # Independent OLS regression on HoltBellBao_v1_frozen_2026.csv (n=147).
