@@ -1,47 +1,22 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+Apache License
 
-Copyright 2026 International Sci Ink Press Ltd. 205414288
+Version 2.0, January 2004
+
+http://www.apache.org/licenses/
+
+Copyright 2026 International Sci Ink Press Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+```
+http://www.apache.org/licenses/LICENSE-2.0
+```
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
 See the License for the specific language governing permissions and
 limitations under the License.
-
-────────────────────────────────────────────────────────────────────────────
-ATTRIBUTION REQUIREMENT (Apache License §4(c) — required preservation of
-NOTICE file):
-
-When using this package in research, clinical software, mobile apps, or any
-derivative work, you MUST cite:
-
-    Inkov, I. (2026). "Nutramilo Insulin Score (NIS): An Open,
-    Macronutrient-Derived Algorithm for Predicting Postprandial
-    Insulinaemic Response — Development and Validation Against the Holt
-    Food Insulin Index." International Journal of Medical Reviews and
-    Case Reports, Vol. X(Y), pp. ZZ-ZZ. DOI: 
-
-────────────────────────────────────────────────────────────────────────────
-TRADEMARK NOTICE:
-
-"NIS™", "Nutramilo Insulin Score™", and "Nutramilo™" are trademarks of
-Nutramilo Ltd. The trademark rights are NOT granted under this Apache 2.0
-license. Use of these marks in commercial products, marketing, or branding
-requires written permission from Nutramilo Ltd. (legal@nutramilo.com).
-
-You ARE permitted to use the marks in:
-  - Academic citations and references to this algorithm
-  - Bug reports and forks (with clear disclaimer)
-  - Educational material describing the algorithm
-
-You are NOT permitted to use the marks to:
-  - Brand a competing or derivative product as "NIS-powered" without licence
-  - Imply endorsement by Nutramilo Ltd.
