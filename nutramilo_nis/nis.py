@@ -371,9 +371,8 @@ def compute_nis(
         contributions=contributions,
         nis_version=NIS_VERSION,
         coefficients_date=NIS_COEFFICIENTS_DATE,
-        citation=(
-    "Nutramilo Insulin Score (NIS). "
-    "See CITATION.cff for citation metadata."
-),
+                citation=(
+            "Nutramilo Insulin Score (NIS). "
+            "See CITATION.cff for citation metadata."
+    ),
     )
-    """
