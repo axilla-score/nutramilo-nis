@@ -14,7 +14,7 @@
 > NIS is intended for research, educational use, software development,
 and exploratory nutritional analysis. It should not be interpreted as a
 clinically validated predictor of postprandial insulin response.
-> ⚠️ Scientific status. NIS v1.1.5 represents an exploratory methodology.
+> ⚠️ Scientific status. NIS v1.1.6 represents an exploratory methodology.
 The algorithm is intended for comparative analysis of meals and hypothesis
 generation rather than diagnostic or therapeutic decision-making.
 
@@ -22,7 +22,7 @@ generation rather than diagnostic or therapeutic decision-making.
 
 ## ✨ Why NIS?
 
-| Property | Holt Food Insulin Index (FII) | **NIS v1.1.5** |
+| Property | Holt Food Insulin Index (FII) | **NIS v1.1.6** |
 |---|---|---|
 | In-vivo insulin AUC measurement required | ✅ Yes | ❌ No — **composition only** |
 | Suitable for mobile apps & CGM-less use | ❌ No | ✅ Yes |
@@ -102,7 +102,7 @@ print(json.dumps(result.to_dict(), indent=2))
 | Black bean & spinach bowl | 30 / 14 / 6 / 13 | **44.3** | Moderate |
 | Avocado-omelette + side salad | 6 / 18 / 22 / 5 | **42.0** | Moderate |
 
-## 📐 Algorithm (5-step pipeline, v1.1.5)
+## 📐 Algorithm (5-step pipeline, v1.1.6)
 
 1. **Per-1000-kJ normalisation** using Atwater factors (17·C + 17·P + 37·F kJ/g).
 2. **Linear regression layer** — independent OLS on the frozen
@@ -122,7 +122,7 @@ print(json.dumps(result.to_dict(), indent=2))
 
 > **Note on validation framing.**  The n = 147 training cohort and the
 > n = 63 cross-cohort calibration set share Holt 1997 foods (derivational
-> overlap, see manuscript §4.3 L1).  All inferential claims in v1.1.5 are
+> overlap, see manuscript §4.3 L1).  All inferential claims in v1.1.6 are
 > therefore restricted to the **n = 25 strictly out-of-sample subset**
 > (Bao 2011, Nilsson 2004, Boirie 1997, Trichopoulou 2003, Sahyoun 2008).
 
