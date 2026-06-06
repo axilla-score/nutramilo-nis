@@ -1,5 +1,5 @@
 # nutramilo-nis
-
+[![PyPI version](https://img.shields.io/pypi/v/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
 [![Python ≥ 3.9](https://img.shields.io/badge/python-≥3.9-green.svg)](https://python.org)
 <!-- DOI badge will be added after publication -->
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
