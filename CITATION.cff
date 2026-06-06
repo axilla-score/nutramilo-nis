@@ -36,7 +36,7 @@ keywords:
   - regression
   - python
 
-version: "1.1.5"
+version: "1.1.6"
 date-released: "2026-02-28"
 
 # Identifiers will be filled in automatically by Zenodo on first GitHub release.
@@ -46,14 +46,14 @@ identifiers:
     value: "10.5281/zenodo.PLACEHOLDER_CONCEPT"
   - description: "Zenodo archive for this specific version"
     type: doi
-    value: "10.5281/zenodo.PLACEHOLDER_V1_1_5"
+    value: "10.5281/zenodo.PLACEHOLDER_V1_1_6"
 
 # Mandatory: the accompanying methodology paper.
 preferred-citation:
   type: article
   title: >-
     An Open, Transparent Macronutrient-Derived Insulinogenic Surrogate
-    (NIS v1.1.5): An Exploratory Methodology Study with Out-of-Sample
+    (NIS v1.1.6): An Exploratory Methodology Study with Out-of-Sample
     Ablation, Deterministic Feature Classification, and Post-Hoc TOST
     Equivalence Analysis
   authors:
@@ -64,7 +64,7 @@ preferred-citation:
   year: 2026
   status: in-preparation
   journal: "medRxiv / Int J Med Rev Case Rep (target)"
-  doi: "10.XXXX/ijmrcr.2026.NIS"   # placeholder — replace on acceptance
+  doi:   # placeholder — replace on acceptance
 
 # Honest disclosure required by the licence (Apache 2.0 §4(c)).
 abstract: >-
