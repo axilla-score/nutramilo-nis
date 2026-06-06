@@ -4,7 +4,7 @@ from nutramilo_nis import compute_nis, NIS_VERSION, NIS_COEFFICIENTS
 
 
 def test_version_frozen():
-    assert NIS_VERSION == "1.1.8"
+    assert NIS_VERSION == "1.1.9"
     # Frozen coefficients — MUST NEVER change in v1.x (only modifiers added).
     assert NIS_COEFFICIENTS == {
         "carbs": 1.61, "protein": 0.66, "fat": 1.20, "fiber": -1.14,
