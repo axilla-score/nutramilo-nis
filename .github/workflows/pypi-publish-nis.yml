@@ -154,6 +154,7 @@ jobs:
           packages-dir: dist/
 
   github-release:
+  if: false
     name: Create GitHub Release
     needs: [publish-pypi, build]
     runs-on: ubuntu-latest
@@ -183,10 +184,10 @@ jobs:
             ```
 
             **Cite (required by NOTICE):**
-            > Inkov, I. et al. (2026). Nutramilo Insulin Score (NIS):
+            > Inkov, I. (2026). Nutramilo Insulin Score (NIS):
             > An Open, Macronutrient-Derived Algorithm for Predicting
             > Postprandial Insulinaemic Response. Int J Med Rev Case Rep.
-            > DOI: 10.XXXX/ijmrcr.2026.NIS
+            > DOI: 
 
             **License:** Apache-2.0 + mandatory citation clause (see NOTICE).
             **PyPI:** https://pypi.org/project/nutramilo-nis/${{ needs.build.outputs.version }}/
