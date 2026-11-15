@@ -2,8 +2,8 @@ cff-version: 1.2.0
 
 title: "Nutramilo Insulin Score (NIS) — Open-source algorithm for estimating the relative insulinogenic potential of meals from nutritional composition."
 message: >-
-  If you use this software in research, please cite both the software (this
-  CITATION.cff) and the accompanying methodology paper (preferred-citation).
+  If you use this software in research, please cite this software release.
+  See the repository documentation for methodology, evidence and limitations.
 type: software
 
 
@@ -33,11 +33,14 @@ abstract: >-
   Nutramilo Insulin Score (NIS) is a deterministic, source-aware computational
   surrogate for the Holt Food Insulin Index. Four frozen OLS coefficients
   (per-1000-kJ density of carbohydrate, protein, fat, fiber) trained on a
-  public n=147 Holt-Bell-Bao cohort, augmented with plant/mixed/animal source
+  archived n=151-row Holt-Bell-Bao dataset (the historical effective n=147
+  claim remains unresolved), augmented with plant/mixed/animal source
   multipliers, an energy-normalised pure-fat extrapolation guard, an optional
   Le-2008 fructose split, and a cross-cohort linear calibration. Primary
-  inferential evaluation is restricted to a strictly out-of-sample n=25
-  literature-pooled subset. NIS v1.1.9 is positioned as an EXPLORATORY
+  evaluation includes a non-Holt n=25 literature-pooled subset that is
+  out-of-sample for regression but was included in calibration fitting.
+  Independent external validation has not been achieved. NIS v1.1.9
+  is positioned as an EXPLORATORY
   methodology study, not as an externally validated predictive model; a
   prospective CGM trial is the planned
   confirmatory step.

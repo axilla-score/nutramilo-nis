@@ -39,7 +39,7 @@ validation = ["numpy>=1.24", "pandas>=2.0", "scipy>=1.10"]
 Homepage = "https://nutramilo.com/science"
 Repository = "https://github.com/axilla-score/nutramilo-nis"
 Documentation = "https://nutramilo.com/science/nis"
-Issues = "https://github.com//axilla-score/nutramilo-nis/issues"
+Issues = "https://github.com/axilla-score/nutramilo-nis/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
