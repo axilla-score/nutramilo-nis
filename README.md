@@ -1,97 +1,64 @@
 # nutramilo-nis
+
 [![PyPI version](https://img.shields.io/pypi/v/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20571802.svg)](https://doi.org/10.5281/zenodo.20571802)
 [![Python ≥ 3.9](https://img.shields.io/badge/python-≥3.9-green.svg)](https://python.org)
-<!-- DOI badge will be added after publication -->
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![PyPI downloads](https://img.shields.io/pypi/dm/nutramilo-nis.svg)](https://pypi.org/project/nutramilo-nis/)
-[![Status: exploratory-methodology](https://img.shields.io/badge/status-exploratory--methodology-yellow.svg)](#)
-[![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-purple.svg)](https://github.com/astral-sh/ruff)
+[![Status: exploratory-methodology](https://img.shields.io/badge/status-exploratory--methodology-yellow.svg)](#scientific-status)
 
-> **Reference implementation of the Nutramilo Insulin Score (NIS)** —
-> an open-source algorithm designed to estimate the relative insulinogenic
-> potential of a meal from its nutritional composition.
-> NIS is intended for research, educational use, software development,
-and exploratory nutritional analysis. It should not be interpreted as a
-clinically validated predictor of postprandial insulin response.
-> ⚠️ Scientific status. NIS v1.1.9 represents an exploratory methodology.
-The algorithm is intended for comparative analysis of meals and hypothesis
-generation rather than diagnostic or therapeutic decision-making.
+> **Reference implementation of the Nutramilo Insulin Score (NIS)** — an open-source algorithm that estimates, from a meal's macronutrient composition, how it would rank on the white-bread-referenced Food Insulin Index (FII) of Holt et al. (1997) and derivative literature.
+>
+> NIS is an **exploratory computational surrogate**. It is **not** a medical device, has **not** been clinically validated, and does **not** predict an individual's insulin secretion or glycaemic response.
 
 ---
 
-## ✨ Why NIS?
+## Scientific status
 
-| Property | Holt Food Insulin Index (FII) | **NIS v1.1.9** |
-|---|---|---|
-| In-vivo insulin AUC measurement required | ✅ Yes | ❌ No — **composition only** |
-| Suitable for mobile apps & CGM-less use | ❌ No | ✅ Yes |
-| Frozen, versioned coefficients | ❌ No | ✅ Yes (Apache 2.0, since v1.0) |
-| Open dataset (SHA-256-verified) | ❌ No | ✅ Yes (Zenodo on release) |
-| Out-of-sample evaluation reported | Partial | ✅ Yes (n = 25 hold-out) |
-| Externally validated on fresh CGM cohort | n/a | ❌ **Not yet** — see technical documentation |
+NIS v1.1.9 is an exploratory, open methodology evaluated against pooled literature FII observations. It has **not** undergone prospective clinical validation on any patient cohort. All outputs must be interpreted as comparative estimates against the Holt-FII historical scale, not as physiological measurements. See the [v4 Statistical Evidence Lock](https://doi.org/10.5281/zenodo.20571802) for the full statistical dossier.
 
-## Scientific Status
+## Intended use
 
-NIS has been evaluated during development using internal validation
-procedures and independent test subsets.
+* Comparative ranking of meals by macronutrient composition for research, education, and software development.
+* Hypothesis generation for subsequent experimental work.
+* Reproducibility benchmarking of alternative insulin-response surrogates.
 
-The methodology is intended to provide a transparent, reproducible, and
-open framework for estimating relative meal insulinogenicity from
-nutritional composition.
+**Not intended for:** diagnosis, treatment, dosing decisions, individual-level clinical prediction, or any clinical decision-making.
 
-Users should interpret outputs as comparative estimates rather than direct
-physiological measurements.
+## Reference standard
 
-Future independent validation studies may further clarify the strengths,
-limitations, and potential applications of the methodology.
+NIS is calibrated against the **white-bread-referenced Food Insulin Index (FII)** of Holt et al. (1997), extended by Bell (2014 PhD thesis), Bao (2009, 2011), Nilsson (2004), Boirie (1997), Trichopoulou (2003), and Sahyoun (2008). Pure glucose has a Holt-FII of ≈ 100; white bread is the reference anchor at 100. **NIS values are not interchangeable with glucose-referenced insulinaemic-index measurements** reported in other literature.
 
+---
 
-## 📦 Install
+## Install
 
 ```bash
 pip install nutramilo-nis
 ```
 
-Optional extras:
+Optional extras: `"[validation]"` (numpy / pandas / scipy), `"[dev]"` (pytest, ruff, coverage).
 
-```bash
-pip install "nutramilo-nis[validation]"   # numpy / pandas / scipy for re-running the regression notebook
-pip install "nutramilo-nis[dev]"          # pytest, ruff, coverage
-```
-
-## 🚀 Quick start — 30 seconds
+## Quick start
 
 ```python
 from nutramilo_nis import compute_nis
 
-# A balanced lunch: salmon + quinoa + broccoli
 result = compute_nis(
-    carbs_g=35,
-    protein_g=30,
-    fat_g=15,
-    fiber_g=8,
+    carbs_g=35, protein_g=30, fat_g=15, fiber_g=8,
+    fat_type="mixed", protein_type="mixed",     # defaults — matches worked examples
 )
 
 print(result.nis_percent)   # → 55.4
 print(result.tier)          # → "Medium"
-print(result.tier_color)    # → "#F59E0B"
 print(result.contributions) # → {"carbs": 26.19, "protein": 11.93, "fat": 10.84, "fiber": -5.49}
-print(result.citation)
-# → "See CITATION.cff for citation metadata."
 ```
 
-JSON-serialisable for APIs:
+JSON-serialisable via `.to_dict()`.
 
-```python
-import json
-print(json.dumps(result.to_dict(), indent=2))
-```
+## Worked examples
 
-## 🧪 Worked examples
-
-> Computed with default `mixed` source-type and calibration **on**
-> (slope = 0.7275, intercept = 8.111).  See `tests/test_nis_v1_1_*.py`
-> for the full pinned numerical regression suite.
+Default `mixed` source-type, calibration on (slope = 0.7275, intercept = 8.111).
 
 | Plate | C / P / F / Fb (g) | NIS % | Tier |
 |---|---|---|---|
@@ -101,128 +68,140 @@ print(json.dumps(result.to_dict(), indent=2))
 | Black bean & spinach bowl | 30 / 14 / 6 / 13 | **44.3** | Moderate |
 | Avocado-omelette + side salad | 6 / 18 / 22 / 5 | **42.0** | Moderate |
 
-## 📐 Algorithm (5-step pipeline, v1.1.9)
+---
 
-1. **Per-1000-kJ normalisation** using Atwater factors (17·C + 17·P + 37·F kJ/g).
-2. **Linear regression layer** — independent OLS on the frozen
-   `HoltBellBao_v1_frozen_2026.csv` cohort (n = 147 foods).
-   Coefficients exposed as `NIS_COEFFICIENTS`:
-   `carbs = +1.61 · protein = +0.66 · fat = +1.20 · fiber = −1.14` (per 1000 kJ).
-   Protein and fat scaled by **source-type multipliers** (plant/mixed/animal:
-   protein 0.55/1.00/1.30, fat 0.45/1.00/1.25).
-3. **Pure-fat extrapolation guard** — when `(net-carb + protein) / 1000 kJ < 5 g`
-   the regression output is scaled by `0.15×` (energy-normalised, serving-
-   invariant since v1.1.1).
-4. **Cross-cohort linear calibration** — `obs ≈ 0.7275 × pct + 8.111`
-   (fit on the n = 63 cross-cohort validation set; opt-out via
-   `apply_calibration=False`).
-5. **Optional Holt cross-track + clinical-tier floor**, then
-   **`Final NIS = max(regression_cal, holt, floor)`**, clamped [0, 100].
+## Mathematical methodology (five-step pipeline, v1.1.9)
 
-> **Note on validation framing.**  The n = 147 training cohort and the
-> n = 63 cross-cohort calibration set share Holt 1997 foods (derivational
-> overlap, see see project documentation).  All inferential claims in v1.1.9 are
-> therefore restricted to the **n = 25 strictly out-of-sample subset**
-> (Bao 2011, Nilsson 2004, Boirie 1997, Trichopoulou 2003, Sahyoun 2008).
+1. **Per-1000 kJ normalisation.** Compute total energy with Atwater factors `E = 17·C + 17·P + 37·F` (kJ per g). Scale all macro quantities by `1000 / max(50, E)` g per 1000 kJ.
+2. **Linear regression layer.** Ordinary least-squares with no intercept. Coefficients (per 1000 kJ):
 
-## 📘 API reference
+   | Feature | Coefficient |
+   |---|---:|
+   | net-carbs (carbs − fibre, clipped ≥ 0) | **+1.61** |
+   | protein | **+0.66** |
+   | fat | **+1.20** |
+   | fibre | **−1.14** |
 
-### `compute_nis(carbs_g, protein_g, fat_g, fiber_g=0.0, *, insulin_impact_tier="low", il_total_g=None, fat_type="mixed", protein_type="mixed", sugar_g=0.0, apply_calibration=True) → NisResult`
+   Protein and fat are multiplied by **source-type modifiers** before regression contribution:
+
+   | Source type | `_PROTEIN_TYPE_MULT` | `_FAT_TYPE_MULT` |
+   |---|---:|---:|
+   | plant | 0.55 | 0.45 |
+   | mixed (default) | 1.00 | 1.00 |
+   | animal | 1.30 | 1.25 |
+
+   When `sugar_g` > 0, approximately 50 % of sugar is treated as fructose and multiplied by `FRUCTOSE_MULT = 0.30` (Stanhope 2009 / Le 2008).
+3. **Pure-fat extrapolation guard.** When `(net-carb + protein) / 1000 kJ < 5` g, the regression output is scaled by `0.15×` (serving-invariant since v1.1.1).
+4. **Cross-cohort linear calibration.** `obs ≈ 0.7275 × raw + 8.111`, fit on **all 63** cross-cohort validation rows. Opt-out via `apply_calibration=False`.
+5. **Optional Holt cross-track + clinical-tier floor.** `Final NIS = max(regression_cal, holt, tier_floor)`, clamped `[0, 100]`.
+
+## Input variables
 
 | Argument | Type | Default | Description |
 |---|---|---|---|
-| `carbs_g` | `float` | — | Total carbohydrate grams (net carb = `carbs_g − fiber_g`) |
+| `carbs_g` | `float` | — | Total carbohydrate grams |
 | `protein_g` | `float` | — | Protein grams |
 | `fat_g` | `float` | — | Total fat grams |
-| `fiber_g` | `float` | `0.0` | Dietary fibre grams (blunts response) |
-| `insulin_impact_tier` | `Literal["low","medium","high"]` | `"low"` | Clinical floor band |
-| `il_total_g` | `Optional[float]` | `None` | Pre-computed Insulin Load grams — activates the Holt cross-track |
-| `fat_type` | `Literal["plant","mixed","animal"]` | `"mixed"` | Fat-source multiplier — plant 0.45, mixed 1.00, animal 1.25 (Holt 1997 / Trichopoulou 2003) |
-| `protein_type` | `Literal["plant","mixed","animal"]` | `"mixed"` | Protein-source multiplier — plant 0.55, mixed 1.00, animal 1.30 (Nilsson 2004 / Boirie 1997) |
-| `sugar_g` | `float` | `0.0` | Total sugars; when supplied, ~50 % is treated as fructose (×0.30 insulinogenicity per Le 2008) |
-| `apply_calibration` | `bool` | `True` | Apply cross-cohort linear calibration (slope 0.7275, intercept 8.111). Set `False` to recover raw v1.0.1 regression output |
+| `fiber_g` | `float` | `0.0` | Dietary fibre grams |
+| `insulin_impact_tier` | `"low" / "medium" / "high"` | `"low"` | Clinical floor band |
+| `il_total_g` | `float \| None` | `None` | Pre-computed Insulin Load grams; enables Holt cross-track |
+| `fat_type` | `"plant" / "mixed" / "animal"` | `"mixed"` | Fat-source multiplier |
+| `protein_type` | `"plant" / "mixed" / "animal"` | `"mixed"` | Protein-source multiplier |
+| `sugar_g` | `float` | `0.0` | Total sugars (if specified, ≈ 50 % treated as fructose) |
+| `apply_calibration` | `bool` | `True` | Apply cross-cohort linear calibration |
 
-### `NisResult` (frozen `dataclass`)
+## Output interpretation (`NisResult`)
 
-| Field | Type | Description |
-|---|---|---|
-| `nis_percent` | `float` | Final NIS, 0–100 |
-| `tier` | `str` | `"Low"` / `"Moderate"` / `"Medium"` / `"High"` / `"Very high"` |
-| `tier_color` | `str` | Hex colour for UI (Tailwind-compatible) |
-| `piru` | `float` | Predicted Insulin Response Unit (regression layer raw) |
-| `regression_pct` | `float` | Pure regression output (0–100) |
-| `holt_pct` | `float` | Holt cross-track output (0–100) |
-| `tier_floor_pct` | `float` | Clinical-tier floor applied |
-| `contributions` | `dict[str, float]` | Per-macro absolute contribution to PIRU |
-| `nis_version` | `str` | Frozen version (e.g. `"1.0.0"`) |
-| `coefficients_date` | `str` | Date coefficients were regressed (ISO) |
-| `citation` | `str` | Citation metadata string |
+| Field | Meaning |
+|---|---|
+| `nis_percent` | 0–100 score on the white-bread-referenced Holt-FII scale |
+| `tier` | `Low` / `Moderate` / `Medium` / `High` / `Very high` |
+| `tier_color` | Hex colour for UI |
+| `piru` | Predicted Insulin Response Unit (regression layer raw) |
+| `regression_pct`, `holt_pct`, `tier_floor_pct` | Component values before taking the max |
+| `contributions` | Per-macro absolute contribution to `piru` |
+| `nis_version` | `"1.1.9"` |
+| `coefficients_date` | ISO date the coefficients were regressed |
+| `citation` | Citation metadata string (see `CITATION.cff`) |
 
-Use `.to_dict()` → JSON-serialisable.
+Use `result.to_dict()` for JSON serialisation.
+
+## Training-data provenance
+
+**Training CSV:** `HoltBellBao_v1_frozen_2026.csv`
+**Rows:** **151** (zero exact normalised-name duplicates, zero exact macro-tuple duplicates)
+**SHA-256:** `b41eb157661b2d8ad0f1e2bd0447f7cb61dfc460bb27bff754a59f3f50a2aaec`
+
+OLS regression on all 151 rows reproduces the deployed coefficients (1.61 / 0.66 / 1.20 / −1.14) to two decimal places; full-precision OLS output is `(1.6121954, 0.6587755, 1.1976358, −1.1401008)`. An earlier manifest line referred to an *"effective n = 147 after duplicate removal"*; that row-exclusion rule **cannot be reconstructed** from the frozen artefacts and is therefore marked **UNRESOLVED**. The 2-decimal-place agreement establishes reproducibility to the published precision only — it does not prove methodological equivalence with any historical 147-row procedure.
+
+## Calibration methodology
+
+The single-slope / single-intercept post-hoc calibration `obs ≈ 0.7275 × raw + 8.111` was **fit on all 63** cross-cohort validation rows. Therefore the calibration-fit set entirely contains the n = 25 subset and the n = 9 non-overlap subset used for evaluation. Users who need a calibration-leakage-free estimate can run the package with `apply_calibration=False` and apply their own calibration externally.
+
+## Evaluation results
+
+MAE / RMSE / Pearson r of NIS (0–100) against Holt-FII observations. Bootstrap CIs: `SEED = 20260227, N = 2000`.
+
+| Regime | Protocol | n | MAE | RMSE | Bias | Pearson r | 95 % MAE CI |
+|---|---|---:|---:|---:|---:|---:|---|
+| Full pooled literature cohort | fixed production calibration | **63** | **14.27** | 19.19 | −0.42 | **0.773** | [11.39, 17.51] |
+| Non-Holt subset (citation ≠ Holt 1997) | fixed production calibration | **25** | **10.20** | 13.46 | +2.82 | **0.826** | [7.06, 13.70] |
+| Non-Holt subset | leave-one-out refit calibration | **25** | **11.72** | 14.50 | +2.00 | **0.799** | — |
+| Algorithmically filtered non-overlap subset | fixed production calibration | **9** | **12.81** | 17.10 | +1.83 | **0.447** | [5.74, 20.28] |
+
+**Paired Wilcoxon signed-rank** (baseline vs full NIS on non-Holt n = 25): W = 55.5, z = −2.89, **p = 0.003822** (two-sided, continuity-corrected).
+
+**Important framing.** The non-Holt n = 25 subset is out-of-sample relative to the OLS regression step but is **not** independent of the single-slope / single-intercept calibration step, which was fit on all 63 validation rows. The LOO-refit row quantifies the empirical optimism attributable to that calibration leakage (+1.52 MAE). The 9-row "algorithmically filtered non-overlap" subset is defined by normalised-name, alias, macro-tuple, and publication-manifest non-overlap criteria; **experimental independence at the primary-source level is not fully established**.
 
 ## Reproducibility
 
-| Artifact                | Availability                            |
-| ----------------------- | --------------------------------------- |
-| Source code             | Included in this repository             |
-| Unit tests              | Included in the package                 |
-| Coefficient definitions | Publicly documented in source code      |
-| Example calculations    | Included in README and tests            |
-| Version history         | Available through Git tags and releases |
+```bash
+python -m venv .venv && . .venv/bin/activate
+pip install --no-cache-dir nutramilo-nis==1.1.9 numpy pandas scikit-learn pytest
 
-All calculations are fully reproducible from the published source code and released package versions.
+# 18/18 bundled test-suite
+python -m pytest tests -v
 
-## ™ Trademark Notice
+# Full v4 reproducibility pack (if downloaded):
+python verify_nis.py        # from nutramilo_nis_public_release_verification.zip
+```
 
-NIS, Nutramilo Insulin Score, and Nutramilo may be used to identify
-the project and associated materials.
+Package artefact hashes:
 
-The Apache 2.0 license applies to the software source code.
-
-Commercial use of names, logos, and branding elements may be subject to
-separate intellectual property rights where applicable.
-
-## ⚖️ Disclaimer & regulatory framing
-
-NIS is intended for **educational and research** purposes.
-It is **not** a medical device, does **not** diagnose any disease, and should
-**not** replace professional clinical judgement.
-
-
-## 🏗️ Roadmap (semver-frozen)
-
-- **v1.x** — patch fixes only; coefficients **never** change.
-- **v2.0.x** — prospective CGM trial re-regression.
-
-
-| GDPR | No personal data processed by the library itself |
-
-## 🤝 NIS vs DIL — different questions, different units
-
-NIS and DIL are **complementary, not interchangeable**:
-
-| | **NIS** (per-meal) | **DIL** (per-meal & daily) |
-|---|---|---|
-| Question | *"How insulinogenic is THIS meal compared to pure glucose?"* | *"How many grams of carb-equivalent insulin load did I eat today?"* |
-| Output | 0–100 % (intensity score) | grams of carb-equivalent (load) |
-| Use-case | Compare two meals; rank foods on a phone; coach single-meal swaps | Daily budget tracking; weekly trend monitoring; clinical dosing-adjacent reasoning |
-| Formula | 5-step pipeline with source-aware multipliers, pure-fat guard, cross-cohort calibration | `0.69 × protein + max(carbs − fiber, 0)` per food, summed across the day |
-| Validation | exploratory out-of-sample evaluation reported in project documentation | OLS-stable across Ridge/LASSO; food-level coefficient frozen at 0.69 since 2026-02-10 |
-| In this SDK | `compute_nis(...)` | not bundled — see `nutramilo-health` package or `services/dil_formula.py` in the Nutramilo platform |
-
-If you need both layers (per-meal NIS for ranking + daily DIL for budget),
-combine `compute_nis` here with the open `compute_dil` formula:
-`DIL_g = max(0, 0.69·protein + max(0, carbs − fiber))`.
-
-## 📜 Licence
-
-[Apache 2.0](LICENSE) — see NOTICE for the mandatory citation clause.
-
-## 💬 Contact
-
-| For | Email |
+| File | SHA-256 |
 |---|---|
-| Research collaboration | research@nutramilo.bg |
-| Trademark / commercial licensing | legal@nutramilo.bg |
-| Bug reports & feature requests | https://github.com/axilla-score/nutramilo-nis/issues |
-| General product info | https://nutramilo.com/science |
+| `nutramilo_nis-1.1.9-py3-none-any.whl` | `7d4c29cc533c3fd43447666500b76fee851f536bf91577ea54777e2125c533d6` |
+| `nutramilo_nis-1.1.9.tar.gz` | `75da8335938d7876430c873c8be0973197ff06a3bce199ceef31beb77878ca7d` |
+
+## Scientific limitations
+
+1. **No independent external validation.** No cohort collected outside the training publications is included in this release. The non-Holt subset overlaps the calibration-fit set by 25/63 = 39.68 %.
+2. **Training-cohort size is unresolved at full methodological precision.** The frozen CSV contains 151 rows; the "effective n = 147" manifest claim is unreconstructible from the shipped artefacts.
+3. **The n = 9 non-overlap subset is algorithmic, not experimentally verified** at the primary-source level. Reported as a lower-bound estimate under stricter non-overlap criteria; Pearson r = 0.447 has a wide bootstrap CI reflecting the small sample.
+4. **NIS is bound to the Holt-FII reference standard.** It is not interchangeable with glucose-referenced indices and does not correspond to continuous-glucose-monitoring (CGM) response measures.
+5. **Pure-fat and pure-protein meals** are explicitly down-weighted by the pure-fat guard (step 3). This is a conservative regularisation, not an empirical finding from large pure-fat cohorts.
+
+## Citation and DOI
+
+Please cite both the Zenodo record and this repository:
+
+* Zenodo DOI: [`10.5281/zenodo.20571802`](https://doi.org/10.5281/zenodo.20571802)
+* GitHub: <https://github.com/axilla-score/nutramilo-nis>
+* Full citation metadata: see `CITATION.cff`.
+
+## Disclaimer
+
+NIS is an **exploratory computational surrogate** for the white-bread-referenced Food Insulin Index of Holt et al. 1997 and derivative literature. It estimates, from macronutrient composition alone, how a meal would rank on that historical index — **not** the user's individual postprandial insulin AUC, glycaemic response, or any clinical outcome.
+
+NIS has **not** undergone prospective clinical validation on any patient cohort. It is intended for research, education, software development, and comparative hypothesis generation. It is **not** a medical device under EU MDR 2017/745 or US 21 CFR 820, is **not** intended for diagnosis, treatment, or dosing decisions, and does **not** replace professional clinical judgement.
+
+Users with diabetes, hypoglycaemia, or on insulin therapy must consult a qualified clinician before acting on NIS outputs.
+
+## Roadmap
+
+* **v1.x** — patch fixes only; coefficients **never** change.
+* **v2.0.x** — prospective CGM / independent-cohort re-regression (required for "externally validated" status).
+
+## Licence
+
+[Apache 2.0](LICENSE) — see `NOTICE.txt` for the mandatory citation clause.
